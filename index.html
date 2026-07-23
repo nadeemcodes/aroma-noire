@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aroma Noire — Fine Fragrance, Reimagined</title>
+<link rel="icon" href="data:,">
+<!-- Razorpay's real checkout script endpoint - https://razorpay.com is their marketing homepage, not a script, and would never define window.Razorpay. This is the same URL app.js's loadRazorpayScript() already falls back to on the other pages, so both stay in sync. -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body data-page="home">
+
+<div class="announce"><b>Extra 5% off</b> on prepaid orders · Complimentary sampling on orders above ₹2,500</div>
+
+<nav class="nav">
+  <div class="nav-row">
+    <div class="nav-left">
+      <button class="nav-hamburger" id="navHamburger" type="button" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="index.html" class="logo-mark" id="navLogo"></a>
+    </div>
+    <div class="nav-center">
+      <div class="nav-brand-text">Aroma Noire</div>
+      <ul class="nav-links" id="navLinks"></ul>
+    </div>
+    <div class="nav-actions">
+      <div class="nav-search" id="navSearchWrap">
+        <svg class="nav-search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="perfumeSearch" class="nav-search-input" placeholder="Search perfumes" autocomplete="off" aria-label="Search perfumes">
+        <div class="search-suggestions" id="searchSuggestions"></div>
+      </div>
+      <button class="icon-btn" id="cartToggle" aria-label="Open bag">
+        <svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+<aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Site menu">
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-title">Menu</span>
+    <button class="modal-close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+  </div>
+  <ul class="mobile-nav-links" id="mobileNavLinks"></ul>
+</aside>
+
+<section class="hero" id="top">
+  <div class="hero-track" id="heroTrack"></div>
+  <button class="hero-nav hero-nav-prev" id="heroPrev" type="button" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24"><polyline points="15 6 9 12 15 18"/></svg>
+  </button>
+  <button class="hero-nav hero-nav-next" id="heroNext" type="button" aria-label="Next slide">
+    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<div class="usp-strip">
+  <div class="container usp-row" id="uspRow"></div>
+</div>
+
+<!-- 1. BEST SELLERS (Horizontal Slider Track) -->
+<section class="section" id="bestSellersSection">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Curated</div>
+        <h2>Best Sellers</h2>
+      </div>
+      <p>Five signature pieces from across the house, full note structure and true sizing shown before you buy.</p>
+    </div>
+    <div class="horizontal-slider-track" id="bestSellersSlider"></div>
+    <div class="section-cta">
+      <a href="perfumes.html" class="btn btn-outline">View Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. FOR HIM (2-Column Grid) -->
+<section class="section" id="himSection">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Collection</div>
+        <h2>For Him</h2>
+      </div>
+      <p>Sharp, grounded compositions from the house's men's rack.</p>
+    </div>
+    <div class="horizontal-slider-track" id="himGrid"></div>
+    <div class="section-cta">
+      <a href="perfumes.html" class="btn btn-outline">View Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FOR HER (2-Column Grid) -->
+<section class="section" id="herSection">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Collection</div>
+        <h2>For Her</h2>
+      </div>
+      <p>Florals, gourmands and ambers from the house's women's rack.</p>
+    </div>
+    <div class="horizontal-slider-track" id="herGrid"></div>
+    <div class="section-cta">
+      <a href="perfumes.html" class="btn btn-outline">View Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- UNISEX -->
+<section class="section" id="unisexSection">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Collection</div>
+        <h2>Unisex</h2>
+      </div>
+      <p>Gender-neutral compositions, worn equally across the house's full rack.</p>
+    </div>
+    <div class="horizontal-slider-track" id="unisexGrid"></div>
+    <div class="section-cta">
+      <a href="perfumes.html" class="btn btn-outline">View Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ATTARS (2-Column Grid) -->
+<section class="section" id="attarSection">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Concentrated Oils</div>
+        <h2>Attars</h2>
+      </div>
+      <p>Alcohol-free perfume oils, worn close to the skin.</p>
+    </div>
+    <div class="horizontal-slider-track" id="attarGrid"></div>
+    <div class="section-cta">
+      <a href="attars.html" class="btn btn-outline">View Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. OUR CREATIONS (2-Column Grid) -->
+<section class="section" id="creationsSection">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">In-House</div>
+        <h2>Our Creations</h2>
+      </div>
+      <p>In-house compositions, priced and sized the same way as everything else we sell.</p>
+    </div>
+    <div class="horizontal-slider-track" id="creationsGrid"></div>
+    <div class="section-cta">
+      <a href="our-creation.html" class="btn btn-outline">View Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<!-- 6. BAKHOUR (2-Column Grid) -->
+<section class="section" id="bakhourSection">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Incense &amp; Rituals</div>
+        <h2>Bakhour</h2>
+      </div>
+      <p>Bakhoor and burning accessories, sold as single fixed pieces.</p>
+    </div>
+    <div class="horizontal-slider-track" id="bakhourGrid"></div>
+    <div class="section-cta">
+      <a href="bakhour.html" class="btn btn-outline">View Full Collection</a>
+    </div>
+  </div>
+</section>
+
+<section class="story-band" id="story">
+  <div class="container story-grid">
+    <div class="story-media" id="storyMedia"></div>
+    <div class="story-copy" id="storyCopy"></div>
+  </div>
+</section>
+
+<section class="section" id="visit">
+  <div class="container">
+    <div class="visit-card" id="visitCard"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="logo-mark" id="footerLogo"></a>
+      <p>Fine fragrance, engineered by note. Shipped across India, sampled before you commit.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Your email" required aria-label="Email address">
+        <button type="submit">Join</button>
+      </form>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul id="footerShop"></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul id="footerCompany"></ul></div>
+    <div class="footer-col" id="footerVisit"></div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© 2026 Aroma Noire. All rights reserved.</p>
+    <div class="social-row" id="socialRow"></div>
+  </div>
+</footer>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag">
+  <div class="cart-head"><h3>Your Bag</h3><button class="modal-close" id="cartClose" aria-label="Close bag">&times;</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+    <p class="cart-note">Shipping and taxes calculated at checkout.</p>
+    <button class="btn btn-solid" style="width:100%;justify-content:center" id="checkoutBtn">Checkout</button>
+  </div>
+</aside>
+
+<!-- ==========================================================
+     ORDER TRACKING DRAWER
+     Reuses .cart-drawer/.drawer-overlay wholesale (same slide
+     transform, overlay mask, scroll-lock) - see app.js's Order
+     Tracking Drawer section for the open/close/submit logic.
+     The form below is static markup that app.js only toggles/
+     populates, same convention as #checkoutForm.
+     ========================================================== -->
+<div class="drawer-overlay" id="trackingOverlay"></div>
+<aside class="cart-drawer" id="trackingDrawer" aria-label="Track your order" aria-hidden="true">
+  <div class="cart-head"><h3>Track Your Order</h3><button class="modal-close" id="trackingClose" aria-label="Close tracking">&times;</button></div>
+  <div class="cart-items" id="trackingBody">
+    <form class="checkout-form tracking-form" id="trackingForm">
+      <label>Order ID
+        <input type="text" id="trackOrderId" name="trackOrderId" required placeholder="AN-4092" autocomplete="off">
+      </label>
+      <label>Email Address
+        <input type="email" id="trackEmail" name="trackEmail" required autocomplete="email">
+      </label>
+      <p class="tracking-error" id="trackingError" style="display:none"></p>
+      <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center;margin-top:1.4rem">Track My Order</button>
+    </form>
+    <div class="tracking-result" id="trackingResult" style="display:none"></div>
+  </div>
+</aside>
+
+<!-- ==========================================================
+     CUSTOM DISCOVERY SET MODAL
+     Reuses .overlay/.modal/.modal-close wholesale (same dark scrim +
+     centered card mechanics as quick-view/checkout/coming-soon) with
+     a scoped frosted-glass blur (#discoveryOverlay in main.css). The
+     10 slots are rendered by app.js's renderDiscoverySlots(), not
+     hand-written here - populated exclusively from the "Our Creation"
+     category, one flat ₹999 for all 10 regardless of which fragrances
+     are picked.
+     ========================================================== -->
+<div class="overlay" id="discoveryOverlay">
+  <div class="modal discovery-modal" id="discoveryModal">
+    <div class="discovery-body">
+      <button class="modal-close" id="discoveryClose" aria-label="Close discovery set">&times;</button>
+      <div class="modal-header">
+        <h2>Curate Your Discovery Set</h2>
+        <p class="subtitle">Select 10 unique 5ml vials from Our Creations &mdash; &#8377;999</p>
+      </div>
+      <div class="discovery-slots-wrapper" id="discoverySlotsWrapper"></div>
+      <div class="discovery-footer">
+        <div class="selection-counter">Selected: <span id="slotsFilledCount">0</span> / 10</div>
+        <button id="addDiscoveryToCart" class="btn btn-solid" disabled>Add Discovery Set to Bag (&#8377;999)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="checkoutOverlay">
+  <div class="modal checkout-modal" id="checkoutModal">
+    <div class="modal-body checkout-body">
+      <button class="modal-close" id="checkoutClose" aria-label="Close checkout">&times;</button>
+      <h3>Checkout</h3>
+      <p class="checkout-summary" id="checkoutSummary"></p>
+      <form class="checkout-form" id="checkoutForm">
+        <label>Full Name
+          <input type="text" id="ckName" name="ckName" required autocomplete="name">
+        </label>
+        <label>Email
+          <input type="email" id="ckEmail" name="ckEmail" required autocomplete="email">
+        </label>
+        <label>Phone Number
+          <input type="tel" id="ckPhone" name="ckPhone" required autocomplete="tel" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number">
+        </label>
+        <label>Shipping Address
+          <textarea id="ckAddress" name="ckAddress" rows="3" required autocomplete="street-address"></textarea>
+        </label>
+        <div class="checkout-total-row"><span>Total to pay</span><span id="checkoutTotal">₹0</span></div>
+        <button type="submit" class="btn btn-solid" style="width:100%;justify-content:center">Proceed to Pay</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- type="module" is required: app.js uses `import` to pull themeData/products from config.js and db/auth/googleProvider from firebase-config.js. app.js's own import statements pull in firebase-config.js automatically, no separate <script> tag needed for it. Module scripts resolve their own dependency graph, so load order no longer needs to be enforced by tag order the way it did as classic scripts. -->
+<script type="module" src="assets/js/config.js"></script>
+<script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
